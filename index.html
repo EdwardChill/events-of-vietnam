@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đếm Ngược Sự Kiện 2026</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #b91c1c; /* background đỏ */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  h1 {
+    color: white;
+    text-align: center;
+    margin: 20px;
+    text-shadow: 2px 2px 6px #000;
+  }
+
+  .container {
+    display: flex;
+    gap: 20px;
+    width: 95%;
+    max-width: 1200px;
+    margin-bottom: 30px;
+  }
+
+  .event {
+    flex: 1;
+    background-color: white;
+    padding: 30px 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .event1 { border: 5px solid #1e40af; } /* viền xanh dương */
+  .event2 { border: 5px solid #ca8a04; } /* viền vàng */
+  .event3 { border: 5px solid #16a34a; } /* viền xanh lá */
+
+  .event h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 5px #fff;
+    text-transform: capitalize; /* viết hoa chữ cái đầu */
+  }
+
+  .event1 h2 { color: #1e40af; }
+  .event2 h2 { color: #ca8a04; }
+  .event3 h2 { color: #16a34a; }
+
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 1.5rem;
+  }
+
+  .time-box {
+    background: #f3f4f6;
+    padding: 15px 20px;
+    border-radius: 10px;
+    min-width: 60px;
+    text-transform: capitalize; /* viết hoa chữ cái đầu */
+  }
+
+  .label {
+    font-size: 1rem;
+    margin-top: 5px;
+    color: #334155;
+    text-transform: capitalize; /* viết hoa chữ cái đầu */
+  }
+
+  .info {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #1f2937;
+  }
+</style>
+</head>
+<body>
+
+<h1>Đếm Ngược Sự Kiện 2026</h1>
+
+<div class="container">
+  <!-- Khung 1 -->
+  <div class="event event1" data-date="2025-12-25T00:00:00">
+    <h2>Giáng Sinh 2026</h2>
+    <div class="countdown">
+      <div class="time-box"><div class="days">??</div><div class="label">Ngày</div></div>
+      <div class="time-box"><div class="hours">??</div><div class="label">Giờ</div></div>
+      <div class="time-box"><div class="minutes">??</div><div class="label">Phút</div></div>
+      <div class="time-box"><div class="seconds">??</div><div class="label">Giây</div></div>
+    </div>
+  </div>
+
+  <!-- Khung 2 -->
+  <div class="event event2" data-date="2026-02-10T00:00:00">
+    <h2>Tết 2026</h2>
+    <div class="countdown">
+      <div class="time-box"><div class="days">??</div><div class="label">Ngày</div></div>
+      <div class="time-box"><div class="hours">??</div><div class="label">Giờ</div></div>
+      <div class="time-box"><div class="minutes">??</div><div class="label">Phút</div></div>
+      <div class="time-box"><div class="seconds">??</div><div class="label">Giây</div></div>
+    </div>
+  </div>
+
+  <!-- Khung 3 -->
+  <div class="event event3" data-date="2026-09-29T00:00:00">
+    <h2>Trung Thu 2026</h2>
+    <div class="countdown">
+      <div class="time-box"><div class="days">??</div><div class="label">Ngày</div></div>
+      <div class="time-box"><div class="hours">??</div><div class="label">Giờ</div></div>
+      <div class="time-box"><div class="minutes">??</div><div class="label">Phút</div></div>
+      <div class="time-box"><div class="seconds">??</div><div class="label">Giây</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Thông tin người xem và lượt truy cập -->
+<div class="info" id="visitorInfo">
+  Xin Chào, <span id="visitorName"></span>!<br>
+  Số Lượt Truy Cập Trang Web: <span id="visitCount">0</span>
+</div>
+
+<script>
+// Countdown cho tất cả sự kiện
+function updateCountdown() {
+  const now = new Date();
+  document.querySelectorAll('.event').forEach(event => {
+    const target = new Date(event.dataset.date);
+    const diff = target - now;
+
+    const daysEl = event.querySelector('.days');
+    const hoursEl = event.querySelector('.hours');
+    const minutesEl = event.querySelector('.minutes');
+    const secondsEl = event.querySelector('.seconds');
+
+    if(diff <= 0){
+      daysEl.textContent = hoursEl.textContent = minutesEl.textContent = secondsEl.textContent = '0';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const minutes = Math.floor((diff / (1000*60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    daysEl.textContent = days;
+    hoursEl.textContent = hours;
+    minutesEl.textContent = minutes;
+    secondsEl.textContent = seconds;
+  });
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Nhập tên người xem
+let visitorName = localStorage.getItem('visitorName');
+if(!visitorName){
+  visitorName = prompt("Xin Chào! Nhập Tên Của Bạn:");
+  if(visitorName) localStorage.setItem('visitorName', visitorName);
+}
+document.getElementById('visitorName').textContent = visitorName || "Khách";
+
+// Đếm số lượt truy cập trang web
+let visitCount = localStorage.getItem('visitCount');
+visitCount = visitCount ? parseInt(visitCount)+1 : 1;
+localStorage.setItem('visitCount', visitCount);
+document.getElementById('visitCount').textContent = visitCount;
+</script>
+
+</body>
+</html>
+
